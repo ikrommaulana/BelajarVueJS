@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CRUD VueJS</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+  </head>
+  <body id="cruddasar">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="form-group">
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <p></p>
+          <button @click="addStaff" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Tambah Karyawan</button>
+          <p></p>
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">ID Karyawan</th>
+                <th class="text-center">Nama Karyawan</th>
+                <th class="text-center">Divisi</th>
+                <th class="text-center">Tanggal Kontrak</th>
+                <th class="text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="b in dataStaff">
+                <td>{{b.idStaff}}</td>
+                <td>{{b.nameStaff}}</td>
+                <td>{{b.catStaff}}</td>
+                <td>{{b.dateContract}}</td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal" @click="editStaff(b)"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal" @click="delStaff(b)"><i class="glyphicon glyphicon-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 v-if="enable" class="modal-title">Tambah Karyawan</h4>
+                        <h4 v-else="enable" class="modal-title">Edit Karyawan</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form v-if="enable">
+                            <div class="form-group">
+                                <label>Nama Karyawan</label>
+                                <input type="text" class="form-control" placeholder="Masukkan Nama Karyawan" v-model="inputDataStaff.namaStaff"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Divisi</label>
+                                <select class="form-control" v-model="inputDataStaff.divStaff">
+                                    <option value="" disabled>Pilih Divisi</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="it">IT</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Kontrak</label>
+                                <input type="date" class="form-control" placeholder="Masukkan Tanggal Kontrak" v-model="inputDataStaff.dateContract"/>
+                            </div>
+                        </form>
+                        <form v-else="enable">
+                            <div class="form-group">
+                                <label>ID Karyawan</label>
+                                <input type="text" class="form-control" v-model="inputDataStaff.idStaff" disabled/>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Karyawan</label>
+                                <input type="text" class="form-control" placeholder="Masukkan Nama Karyawan" v-model="inputDataStaff.namaStaff"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Divisi</label>
+                                <select class="form-control" placeholder="Pilih Divisi" v-model="inputDataStaff.divStaff">
+                                  <option value="" disabled>Pilih Divisi</option>
+                                  <option value="marketing">Marketing</option>
+                                  <option value="finance">Finance</option>
+                                  <option value="it">IT</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Kontrak</label>
+                                <input type="date" class="form-control" placeholder="Masukkan Tanggal Kontrak" v-model="inputDataStaff.dateContract"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
+                        <button v-if="enable" type="button" class="btn btn-primary" data-dismiss="modal" @click="saveStaff(inputDataStaff)">Simpan</button>
+                        <button v-else="enable" type="button" class="btn btn-success" data-dismiss="modal" @click="updateStaff(inputDataStaff)">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bower_components/vue/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>

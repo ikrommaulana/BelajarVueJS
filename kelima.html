@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <dihitung nama="Likes"></dihitung>
+      <dihitung nama="dislikes"></dihitung>
+    </div>
+
+    <template id="dihitung-template">
+      <h1>{{nama}}</h1>
+      <button @click="count +=1">{{count}}</button>
+    </template>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript">
+    //global component
+    Vue.component('dihitung',{
+      template: '#dihitung-template',
+      props: ['nama'],
+      data: function(){
+        return {count:0}
+      }
+    });
+
+    new Vue({
+      el:'#app'
+    });
+
+    </script>
+  </body>
+</html>
